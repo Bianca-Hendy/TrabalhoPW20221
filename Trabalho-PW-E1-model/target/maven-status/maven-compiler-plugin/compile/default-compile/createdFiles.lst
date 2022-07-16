@@ -1,0 +1,12 @@
+br\edu\ifsul\pw2022\model\Especialidade.class
+br\edu\ifsul\pw2022\test\TestePesistenciaAluno.class
+br\edu\ifsul\pw2022\model\Curso.class
+br\edu\ifsul\pw2022\model\Aluno.class
+br\edu\ifsul\pw2022\model\Docente.class
+br\edu\ifsul\pw2022\model\Permissao.class
+br\edu\ifsul\pw2022\model\Nota.class
+br\edu\ifsul\pw2022\model\Professor.class
+br\edu\ifsul\pw2022\test\Persistence.class
+br\edu\ifsul\utilrelatorio\ConstroiFacul.class
+br\edu\ifsul\pw2022\model\Disciplina.class
+br\edu\ifsul\pw2022\model\Instituicao.class
