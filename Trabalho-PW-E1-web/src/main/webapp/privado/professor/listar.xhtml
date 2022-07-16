@@ -14,89 +14,92 @@
                                  icon="pi pi-plus"
                                  update="formEdicao"
                                  process="@this"
-                                 oncomplete="PF('dlg').show();"/>
-                    <div align="center">
-                        <p:panelGrid columns="11">
-                            <p:outputLabel value="Ordem: "/>
-                            <p:selectOneMenu value="#{controleProfessor.dao.ordemAtual}"
-                                             converter="#{controleProfessor.dao.converterOrdem}">
-                                <f:selectItems value="#{controleProfessor.dao.listaOrdem}"
-                                               var="ord" itemValue="#{ord.atributo}"/>
-                                <p:ajax update="listagem"/>
-                            </p:selectOneMenu>
-                            <p:outputLabel value="Filtro:"/>
-                            <p:inputText value="#{controleProfessor.dao.filtro}">
-                                <p:ajax update="listagem" event="blur"/>
-                            </p:inputText>
-                            <p:commandButton value="Filtrar" update="listagem"/>
-                            <p:outputLabel value="Máximo de objetos:"/>
-                            <p:selectOneMenu value="#{controleProfessor.dao.maximoObjetos}">
-                                <f:selectItem itemLabel="5" itemValue="5"/>
-                                <f:selectItem itemLabel="10" itemValue="10"/>
-                                <f:selectItem itemLabel="25" itemValue="25"/>
-                                <f:selectItem itemLabel="50" itemValue="50"/>
-                                <f:selectItem itemLabel="100" itemValue="100"/>
-                                <p:ajax update="listagem"/>
-                            </p:selectOneMenu>
-                            <p:commandButton action="#{controleProfessor.dao.primeiro()}"
-                                             title="Primeiro" update="listagem"
-                                             icon="pi pi-step-backward"/>
-                            <p:commandButton action="#{controleProfessor.dao.anterior()}"
-                                             title="Anterior" update="listagem"
-                                             icon="pi pi-chevron-left"/>  
-                            <p:commandButton action="#{controleProfessor.dao.proximo()}"
-                                             title="Próximo" update="listagem"
-                                             icon="pi pi-chevron-right"/> 
-                            <p:commandButton action="#{controleProfessor.dao.ultimo()}"
-                                             title="Ultimo" update="listagem"
-                                             icon="pi pi-step-forward"/>                        
+                                 oncomplete="PF('dlg').show();"
+                                 rendered="#{p:ifGranted('Professor')}"/>
+                <div align="center">
+                    <p:panelGrid columns="11">
+                        <p:outputLabel value="Ordem: "/>
+                        <p:selectOneMenu value="#{controleProfessor.dao.ordemAtual}"
+                                         converter="#{controleProfessor.dao.converterOrdem}">
+                            <f:selectItems value="#{controleProfessor.dao.listaOrdem}"
+                                           var="ord" itemValue="#{ord.atributo}"/>
+                            <p:ajax update="listagem"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Filtro:"/>
+                        <p:inputText value="#{controleProfessor.dao.filtro}">
+                            <p:ajax update="listagem" event="blur"/>
+                        </p:inputText>
+                        <p:commandButton value="Filtrar" update="listagem"/>
+                        <p:outputLabel value="Máximo de objetos:"/>
+                        <p:selectOneMenu value="#{controleProfessor.dao.maximoObjetos}">
+                            <f:selectItem itemLabel="5" itemValue="5"/>
+                            <f:selectItem itemLabel="10" itemValue="10"/>
+                            <f:selectItem itemLabel="25" itemValue="25"/>
+                            <f:selectItem itemLabel="50" itemValue="50"/>
+                            <f:selectItem itemLabel="100" itemValue="100"/>
+                            <p:ajax update="listagem"/>
+                        </p:selectOneMenu>
+                        <p:commandButton action="#{controleProfessor.dao.primeiro()}"
+                                         title="Primeiro" update="listagem"
+                                         icon="pi pi-step-backward"/>
+                        <p:commandButton action="#{controleProfessor.dao.anterior()}"
+                                         title="Anterior" update="listagem"
+                                         icon="pi pi-chevron-left"/>  
+                        <p:commandButton action="#{controleProfessor.dao.proximo()}"
+                                         title="Próximo" update="listagem"
+                                         icon="pi pi-chevron-right"/> 
+                        <p:commandButton action="#{controleProfessor.dao.ultimo()}"
+                                         title="Ultimo" update="listagem"
+                                         icon="pi pi-step-forward"/>                        
 
-                        </p:panelGrid>
-                    </div>                
-                    <p:dataTable value="#{controleProfessor.dao.listaObjetos}" var="obj"
-                                 id="listagem">
-                        <p:column headerText="ID">
-                            <p:outputLabel value="#{obj.id}"/>                  
-                        </p:column>
-                        <p:column headerText="Nome">
-                            <p:outputLabel value="#{obj.nome}"/>                  
-                        </p:column>
-                        <p:column headerText="Email">
-                            <p:outputLabel value="#{obj.email}"/>                  
-                        </p:column>
-                        <p:column headerText="Nascimento">
-                            <p:outputLabel value="#{obj.nascimento}">
-                                           <f:converter converterId="converterCalendar"/>  
-                            </p:outputLabel>
-                        </p:column>
-                        <p:column headerText="Titulação">
-                            <p:outputLabel value="#{obj.titulacao}"/>
-                        </p:column>     
-                        <p:column headerText="Topícos Interesse">
-                            <p:outputLabel value="#{obj.topicosInteresse}"/>
-                        </p:column>
-                        <p:column headerText="Especialidade">
-                            <p:outputLabel value="#{obj.espec.nome}"/>
-                        </p:column> 
-                        <p:column headerText="Ações">
-                            <div align="center">
-                                <p:commandButton 
-                                    actionListener="#{controleProfessor.alterar(obj.id)}"
-                                    icon="pi pi-pencil"
-                                    title="Editar o objeto de id: #{obj.id}"
-                                    update="formEdicao" process="@this"
-                                    oncomplete="PF('dlg').show();"/>
-                                <p:commandButton
-                                    actionListener="#{controleProfessor.excluir(obj.id)}"
-                                    icon="pi pi-trash"
-                                    update="@form"
-                                    process="@this"
-                                    title="Remover o objeto de id: #{obj.id}"
-                                    onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
-                              return false"/>
-                            </div>
-                        </p:column>
-                    </p:dataTable>
+                    </p:panelGrid>
+                </div>                
+                <p:dataTable value="#{controleProfessor.dao.listaObjetos}" var="obj"
+                             id="listagem">
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{obj.id}"/>                  
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{obj.nome}"/>                  
+                    </p:column>
+                    <p:column headerText="Email">
+                        <p:outputLabel value="#{obj.email}"/>                  
+                    </p:column>
+                    <p:column headerText="Nascimento">
+                        <p:outputLabel value="#{obj.nascimento}">
+                            <f:converter converterId="converterCalendar"/>  
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="Titulação">
+                        <p:outputLabel value="#{obj.titulacao}"/>
+                    </p:column>     
+                    <p:column headerText="Topícos Interesse">
+                        <p:outputLabel value="#{obj.topicosInteresse}"/>
+                    </p:column>
+                    <p:column headerText="Especialidade">
+                        <p:outputLabel value="#{obj.espec.nome}"/>
+                    </p:column> 
+                    <p:column headerText="Ações">
+                        <div align="center">
+                            <p:commandButton 
+                                actionListener="#{controleProfessor.alterar(obj.id)}"
+                                icon="pi pi-pencil"
+                                title="Editar o objeto de id: #{obj.id}"
+                                update="formEdicao" process="@this"
+                                oncomplete="PF('dlg').show();"
+                                rendered="#{p:ifGranted('Professor')}"/>
+                            <p:commandButton
+                                actionListener="#{controleProfessor.excluir(obj.id)}"
+                                icon="pi pi-trash"
+                                update="@form"
+                                process="@this"
+                                title="Remover o objeto de id: #{obj.id}"
+                                onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
+                                                return false"
+                                rendered="#{p:ifGranted('Professor')}"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
             </h:form>  
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
                       modal="true" width="50%" height="100%">
@@ -135,7 +138,7 @@
                                 <f:converter binding="#{converterEspecialidade}"/>
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
-                                
+
                                 <f:selectItems 
                                     value="#{controleProfessor.daoEspecialidade.listaTodos}"
                                     var="esp" itemLabel="#{esp.nome}"/>

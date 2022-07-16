@@ -12,71 +12,77 @@
             <p:tabView id="tab">
                 <p:tab title="Dados da Disciplina">
                     <div align="center">
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="ID" for="txtId"/>
-                    <p:inputText value="#{controleDisciplina.objeto.id}"
-                                 readonly="true" size="5" id="txtId"/>
-                    <p:outputLabel value="Nome" for="txtNome"/>
-                    <p:inputText id="txtNome"
-                                 value="#{controleDisciplina.objeto.nome}"
-                                 size="40" maxlength="40"
-                                 placeholder="Obrigatório"/>
-                    <p:outputLabel value="Descricao" for="txtDescricao"/>
-                    <p:inputText value="#{controleDisciplina.objeto.descricao}"
-                                 id="txtDescricao" size="60" maxlength="60"/>
-                    <p:outputLabel value="Carga Horaria" for="txtCargaHoraria"/>
-                    <p:inputText value="#{controleDisciplina.objeto.cargaHoraria}"
-                                 id="txtCargaHoraria" size="60" maxlength="60"/>
-                                  
-                </p:panelGrid>
-            </div>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="ID" for="txtId"/>
+                            <p:inputText value="#{controleDisciplina.objeto.id}"
+                                         readonly="true" size="5" id="txtId"/>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText id="txtNome"
+                                         value="#{controleDisciplina.objeto.nome}"
+                                         size="40" maxlength="40"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Descricao" for="txtDescricao"/>
+                            <p:inputText value="#{controleDisciplina.objeto.descricao}"
+                                         id="txtDescricao" size="60" maxlength="60"/>
+                            <p:outputLabel value="Carga Horaria" for="txtCargaHoraria"/>
+                            <p:inputText value="#{controleDisciplina.objeto.cargaHoraria}"
+                                         id="txtCargaHoraria" size="60" maxlength="60"/>          
+                        </p:panelGrid>
+                    </div>
                 </p:tab>
-                 <p:tab title="Conhecimentos Minimos">
-                     <p:textEditor value="#{controleDisciplina.objeto.conhecimentoMinimos}"
-                                   secure="false" height="200"/>
+                <p:tab title="Conhecimentos Minimos">
+                    <p:textEditor value="#{controleDisciplina.objeto.conhecimentoMinimos}"
+                                  secure="false" height="200"/>
                 </p:tab>
-                 <p:tab title="Notas">
-                     <p:dataTable value="#{controleDisciplina.objeto.notas}" 
-                                  var="nota" rowIndexVar="idxNota" id="listaNotas">
-                         <f:facet name="header">
-                             <p:commandButton value="Nova Nota" actionListener="#{controleDisciplina.novaNota()}"
-                                              update=":formNota" icon=" pi pi-plus" process="@this" oncomplete="PF('dlgNota').show();"/>
-                         </f:facet>
-                         <p:column headerText="ID">
-                             <p:outputLabel value="#{nota.id}"/>
-                         </p:column>
-                         <p:column headerText="Aluno">
-                             <p:outputLabel value="#{nota.aluno.nome}"/>
-                         </p:column>
-                         <p:column headerText="Nota 1">
-                             <p:outputLabel value="#{nota.nota01}"/>
-                         </p:column>
-                         <p:column headerText="Nota 2">
-                             <p:outputLabel value="#{nota.nota02}"/>
-                         </p:column>
-                         <p:column headerText="Média">
-                             <p:outputLabel value="#{nota.media}"/>
-                         </p:column>
-                         <p:column headerText="Ações">
+                <p:tab title="Notas">
+                    <p:dataTable value="#{controleDisciplina.objeto.notas}" 
+                                 var="nota" rowIndexVar="idxNota" 
+                                 id="listaNotas">
+                        <f:facet name="header">
+                            <p:commandButton value="Nova Nota" 
+                                             actionListener="#{controleDisciplina.novaNota()}"
+                                             update=":formNota" 
+                                             icon=" pi pi-plus" 
+                                             process="@this" 
+                                             oncomplete="PF('dlgNota').show();"/>
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{nota.id}"/>
+                        </p:column>
+                        <p:column headerText="Aluno">
+                            <p:outputLabel value="#{nota.aluno.nome}"/>
+                        </p:column>
+                        <p:column headerText="Nota 1">
+                            <p:outputLabel value="#{nota.nota01}"/>
+                        </p:column>
+                        <p:column headerText="Nota 2">
+                            <p:outputLabel value="#{nota.nota02}"/>
+                        </p:column>
+                        <p:column headerText="Média">
+                            <p:outputLabel value="#{nota.media}"/>
+                        </p:column>
+                        <p:column headerText="Ações">
                             <div align="center">
                                 <p:commandButton 
                                     actionListener="#{controleDisciplina.alterarNota(idxNota)}"
                                     icon="pi pi-pencil"
-                                    title="Editar o objeto de id: #{obj.id}"
-                                    update=":formNota" process="@this"
+                                    title="Editar"
+                                    update=":formNota" 
+                                    process="@this"
                                     oncomplete="PF('dlgNota').show();"/>
                                 <p:commandButton
                                     actionListener="#{controleDisciplina.removerNota(idxNota)}"
                                     icon="pi pi-trash"
                                     update="tab:listaNotas growl"
                                     process="@this"
-                                    onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}')) return false"/>
+                                    onclick="if(!confirm('Deseja remover o objeto de id: #{obj.id}'))
+                                                return false"/>                             
                             </div>
-                          </p:column>
-                     </p:dataTable>
+                        </p:column>
+                    </p:dataTable>
                 </p:tab>
             </p:tabView>
-            
+
             <p:panel>
                 <div align="center">
                     <p:commandButton value="Salvar"
@@ -95,27 +101,23 @@
             <p:panelGrid columns="2">
                 <f:facet name="footer">
                     <div align="center">
-                        <p:commandButton value="Salvar" icon="pi pi-save"
+                        <p:commandButton value="Salvar"
+                                         icon="pi pi-save"
                                          actionListener="#{controleDisciplina.salvarNota()}"
-                                         update="tab:listaNotas growl"
+                                         update="tab:listaNotas growl @form"
                                          process="@form"
-                                 oncomplete="if(!arg.validationFailed(){PF('dlgNota').hide();}"/>
+                                         oncomplete="if(!args.validationFailed){PF('dlgNota').hide();}"/>
                     </div>
                 </f:facet>
                 <p:outputLabel value="ID"/>
                 <p:inputText value="#{controleDisciplina.nota.id}" readonly="true"/>
                 <p:outputLabel value="Aluno" for="selectAluno"/>
-                    <p:selectOneMenu  value="#{controleDisciplina.objeto.alunos}"
-                                   id="selectAluno" 
-                                   filter="true"
-                                   filterMatchMode="startsWith">
-                        <f:converter binding="#{converterAluno}"/>
-                         <f:selectItem itemLabel="Selecione um registro"
-                                              noSelectionOption="true"/>
-                          <f:selectItems 
-                              value="#{controleDisciplina.daoAluno.listaTodos}"
-                                    var="aluno" itemLabel="#{aluno.nome}"/>
-                    </p:selectOneMenu>                
+                <p:selectOneMenu id="selectAluno" value="#{controleDisciplina.nota.aluno}">
+                    <f:converter binding="#{converterAluno}"/>
+                    <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
+                    <f:selectItems value="#{controleDisciplina.daoAluno.listaTodos}"
+                                   var="a" itemLabel="#{a.nome}"/>                    
+                </p:selectOneMenu>
                 <p:outputLabel value="Nota 1" for="txtNota01"/>
                 <p:inputText id="txtNota01" value="#{controleDisciplina.nota.nota01}"
                              placeholder="Obrigatório" size="3" maxlength="3" />

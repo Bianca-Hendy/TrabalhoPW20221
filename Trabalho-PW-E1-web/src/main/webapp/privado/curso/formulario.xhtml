@@ -63,6 +63,9 @@
                         <p:column headerText="Carga Horaria">
                             <p:outputLabel value="#{disciplina.cargaHoraria}"/>
                         </p:column>
+                        <p:column headerText="Conhecimento Minimo">
+                            <p:outputLabel value="#{disciplina.conhecimentoMinimos}"/>
+                        </p:column>
                         <p:column headerText="Ações">
                             <div align="center">
                                 <p:commandButton 
@@ -70,15 +73,18 @@
                                     icon="pi pi-pencil"
                                     title="Editar"
                                     update=":formDisciplina" 
-                                    process="@this"
-                                    oncomplete="PF('dlgDisciplina').show();"/>
+                                    process="@this"                                    
+                                    oncomplete="PF('dlgDisciplina').show();"
+                                    rendered="#{p:ifGranted('Professor')}"
+                                    />
                                 <p:commandButton
                                     actionListener="#{controleCurso.removerDisciplina(idxDisciplina)}"
                                     icon="pi pi-trash"
                                     update="tab:listaDisciplinas growl"
                                     process="@this"
                                     onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
-                                                return false"/>
+                                                return false"
+                                    rendered="#{p:ifGranted('Professor')}"/>
                             </div>
                         </p:column>
                     </p:dataTable>
@@ -107,7 +113,7 @@
                         <p:commandButton value="Salvar"
                                          icon="pi pi-save"
                                          actionListener="#{controleCurso.salvarDisciplina()}"
-                                          update="tab:listaDisciplinas growl @form"
+                                         update="tab:listaDisciplinas growl @form"
                                          oncomplete="if(!args.validationFailed){PF('dlgDisciplina').hide();}"
                                          />
                     </div>
@@ -123,6 +129,9 @@
                 <p:outputLabel value="Carga Horaria" for="txtCH"/>
                 <p:inputText id="txtCH" value="#{controleCurso.disciplina.cargaHoraria}"
                              placeholder="Obrigatório" size="5" maxlength="5" />
+                <p:outputLabel value="Conhecimentos Minimos" for="txtConhecimentosM"/>
+                <p:inputText value="#{controleCurso.disciplina.conhecimentoMinimos}"
+                             id="txtConhecimentosM" size="200" maxlength="200"/> 
             </p:panelGrid>
         </h:form>
         <ui:include src="/templates/ajaxstatus.xhtml"/>

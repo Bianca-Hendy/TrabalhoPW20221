@@ -19,6 +19,9 @@
                            rendered ="#{controleLogin.docenteAutenticado != null}">
                     <p:column>
                         <p:submenu label="Docentes">
+                            <p:menuitem action="#{controleDocente.listar()}"
+                                        value="Manutenção de Docentes"
+                                        ajax="false"/>
                             <p:menuitem action="#{controleAluno.listar()}"
                                         value="Manutenção de Alunos"
                                         ajax="false"/>
@@ -54,7 +57,7 @@
                         </p:submenu>
                          <p:submenu label ="Efetuar logout" 
                                    rendered="#{controleLogin.docenteAutenticado != null}">
-                             <p:menuitem action="#{controleLogin.logout()}" value="Login"
+                             <p:menuitem action="#{controleLogin.logout()}" value="Logout"
                                         icon="pi pi-power-off" ajax="false"/>
                         </p:submenu>
                     </p:column>

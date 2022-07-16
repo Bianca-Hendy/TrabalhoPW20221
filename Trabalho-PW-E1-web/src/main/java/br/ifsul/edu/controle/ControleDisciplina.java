@@ -40,7 +40,7 @@ public class ControleDisciplina implements Serializable {
 
     public ControleDisciplina() {
     }
-
+ 
    
     public void novaNota() {
         nota = new Nota();
@@ -173,4 +173,5 @@ public class ControleDisciplina implements Serializable {
     public void setNovaNota(Boolean novaNota) {
         this.novaNota = novaNota;
     }
+
 }

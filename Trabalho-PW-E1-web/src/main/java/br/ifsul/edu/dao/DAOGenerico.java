@@ -7,6 +7,8 @@ package br.ifsul.edu.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -125,6 +127,7 @@ public class DAOGenerico<TIPO> implements Serializable {
         return (TIPO) em.find(classePersistente, id);
     }
 
+    @RolesAllowed("Professor")
     public void remove(TIPO obj) throws Exception {
         obj = em.merge(obj);
         em.remove(obj);

@@ -14,7 +14,8 @@
                                  icon="pi pi-plus"
                                  update="formEdicao"
                                  process="@this"
-                                 oncomplete="PF('dlg').show();"/>
+                                 oncomplete="PF('dlg').show();"
+                                 rendered="#{p:ifGranted('Professor')}"/>
                 <div align ="center">
                     <p:panelGrid columns="11">
                         <p:outputLabel value="Ordem: "/>
@@ -40,13 +41,13 @@
                         <p:commandButton action="#{controleInstituicao.dao.primeiro()}"
                                          title="Primeiro" update="listagem"
                                          icon="pi pi-step-backward"/>
-                       <p:commandButton action="#{controleInstituicao.dao.anterior()}"
+                        <p:commandButton action="#{controleInstituicao.dao.anterior()}"
                                          title="Anterior" update="listagem"
                                          icon="pi pi-chevron-left"/>  
-                       <p:commandButton action="#{controleInstituicao.dao.proximo()}"
+                        <p:commandButton action="#{controleInstituicao.dao.proximo()}"
                                          title="Próximo" update="listagem"
                                          icon="pi pi-chevron-right"/> 
-                       <p:commandButton action="#{controleInstituicao.dao.ultimo()}"
+                        <p:commandButton action="#{controleInstituicao.dao.ultimo()}"
                                          title="Ultimo" update="listagem"
                                          icon="pi pi-step-forward"/>
                     </p:panelGrid>
@@ -71,20 +72,23 @@
                                 icon="pi pi-pencil"
                                 title="Editar o objeto de id: #{obj.id}"
                                 update="formEdicao" process="@this"
-                                oncomplete="PF('dlg').show();"/>
+                                oncomplete="PF('dlg').show();"
+                                rendered="#{p:ifGranted('Professor')}"/>
                             <p:commandButton
                                 actionListener="#{controleInstituicao.excluir(obj.id)}"
                                 icon="pi pi-trash"
                                 update="@form"
                                 process="@this"
                                 title="Remover o objeto de id: #{obj.id}"
-              onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}')) return false" />
+                                onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
+                          return false"
+                                rendered="#{p:ifGranted('Professor')}"/>
                         </div>
                     </p:column>
                 </p:dataTable>
             </h:form>  
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
-                modal="true" width="50%" height="100%">
+                      modal="true" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
                     <p:growl id="growl"/>
                     <div align="center">
@@ -100,7 +104,7 @@
                             <p:outputLabel value="Ano Fundacao" for="txtAnoFundacao"/>
                             <p:calendar id="txtAnoFundacao" value="#{controleInstituicao.objeto.anoFundacao}"
                                         pattern="dd/MM/yyyy" size="10" navigator="true" mask="dd/MM/yyyy">
-                            <f:converter converterId="converterCalendar"/>
+                                <f:converter converterId="converterCalendar"/>
                             </p:calendar>
                         </p:panelGrid>
                     </div>
@@ -110,7 +114,7 @@
                                              icon="pi pi-save"
                                              actionListener="#{controleInstituicao.salvar()}"
                                              update="formEdicao formListagem"
-                oncomplete="if(!args.validationFailed){PF('dlg').hide();}" />
+                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}" />
                         </div>
                     </p:panel>
                 </h:form>
