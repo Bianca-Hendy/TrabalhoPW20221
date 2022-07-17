@@ -51,7 +51,7 @@ public class Nota implements Serializable {
     @JoinColumn(name = "disciplina_id", referencedColumnName = "id", nullable = false)
     private Disciplina disciplina;
 
-@NotNull(message = " O aluno deve ser informado")
+    @NotNull(message = " O aluno deve ser informado")
     @ManyToOne
     @JoinColumn(name = "aluno", referencedColumnName = "id", nullable = false)
 private Aluno aluno;

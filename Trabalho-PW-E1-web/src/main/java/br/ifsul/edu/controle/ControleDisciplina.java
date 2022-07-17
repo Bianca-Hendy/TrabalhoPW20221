@@ -32,7 +32,7 @@ public class ControleDisciplina implements Serializable {
     private Disciplina objeto;
     @EJB
     private AlunoDAO<Aluno> daoAluno;
-
+//    private Aluno aluno;
     private Nota nota;
 
     
@@ -40,8 +40,20 @@ public class ControleDisciplina implements Serializable {
 
     public ControleDisciplina() {
     }
- 
-   
+// 
+//    public void removerAluno(Aluno obj) {
+//        objeto.getAlunos().remove(obj);
+//        Util.mensagemInformacao("Aluno removido com sucesso!");
+//    }
+//    
+//    public void adicionarAluno() {
+//        if (!objeto.getAlunos().contains(aluno)) {
+//            objeto.getAlunos().add(aluno);
+//            Util.mensagemInformacao("Aluno adicionado com sucesso!");
+//        } else {
+//            Util.mensagemErro("Aluno ja cadastrado!");
+//        }
+//    }
     public void novaNota() {
         nota = new Nota();
         novaNota = true;
@@ -173,5 +185,19 @@ public class ControleDisciplina implements Serializable {
     public void setNovaNota(Boolean novaNota) {
         this.novaNota = novaNota;
     }
+
+//    /**
+//     * @return the aluno
+//     */
+//    public Aluno getAluno() {
+//        return aluno;
+//    }
+//
+//    /**
+//     * @param aluno the aluno to set
+//     */
+//    public void setAluno(Aluno aluno) {
+//        this.aluno = aluno;
+//    }
 
 }

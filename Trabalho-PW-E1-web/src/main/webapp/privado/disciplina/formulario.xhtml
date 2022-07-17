@@ -49,9 +49,6 @@
                         <p:column headerText="ID">
                             <p:outputLabel value="#{nota.id}"/>
                         </p:column>
-                        <p:column headerText="Aluno">
-                            <p:outputLabel value="#{nota.aluno.nome}"/>
-                        </p:column>
                         <p:column headerText="Nota 1">
                             <p:outputLabel value="#{nota.nota01}"/>
                         </p:column>
@@ -60,6 +57,9 @@
                         </p:column>
                         <p:column headerText="Média">
                             <p:outputLabel value="#{nota.media}"/>
+                        </p:column>
+                        <p:column headerText="Aluno">
+                            <p:outputLabel value="#{nota.aluno.nome}"/>
                         </p:column>
                         <p:column headerText="Ações">
                             <div align="center">
@@ -75,7 +75,7 @@
                                     icon="pi pi-trash"
                                     update="tab:listaNotas growl"
                                     process="@this"
-                                    onclick="if(!confirm('Deseja remover o objeto de id: #{obj.id}'))
+                                    onclick="if (!confirm('Deseja remover o objeto de id: #{obj.id}'))
                                                 return false"/>                             
                             </div>
                         </p:column>
@@ -110,14 +110,7 @@
                     </div>
                 </f:facet>
                 <p:outputLabel value="ID"/>
-                <p:inputText value="#{controleDisciplina.nota.id}" readonly="true"/>
-                <p:outputLabel value="Aluno" for="selectAluno"/>
-                <p:selectOneMenu id="selectAluno" value="#{controleDisciplina.nota.aluno}">
-                    <f:converter binding="#{converterAluno}"/>
-                    <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
-                    <f:selectItems value="#{controleDisciplina.daoAluno.listaTodos}"
-                                   var="a" itemLabel="#{a.nome}"/>                    
-                </p:selectOneMenu>
+                <p:inputText value="#{controleDisciplina.nota.id}" readonly="true"/>           
                 <p:outputLabel value="Nota 1" for="txtNota01"/>
                 <p:inputText id="txtNota01" value="#{controleDisciplina.nota.nota01}"
                              placeholder="Obrigatório" size="3" maxlength="3" />
@@ -127,6 +120,13 @@
                 <p:outputLabel value="Media" for="txtMedia"/>
                 <p:inputText id="txtMedia" value="#{controleDisciplina.nota.media}"
                              placeholder="Obrigatório" size="3" maxlength="3" />
+                  <p:outputLabel value="Aluno" for="selectAluno"/>
+                <p:selectOneMenu id="selectAluno" value="#{controleDisciplina.nota.aluno}">
+                    <f:converter binding="#{converterAluno}"/>
+                    <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
+                    <f:selectItems value="#{controleDisciplina.daoAluno.listaTodos}"
+                                   var="a" itemLabel="#{a.nome}"/>                    
+                </p:selectOneMenu> 
             </p:panelGrid>
         </h:form>
         <ui:include src="/templates/ajaxstatus.xhtml"/>
